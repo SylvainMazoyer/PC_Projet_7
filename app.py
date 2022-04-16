@@ -16,14 +16,14 @@ from pathlib import Path
 URL="https://raw.githubusercontent.com/SylvainMazoyer/PC_Projet_7/main/"
 path_transformed=URL+'DATA/'
 df_csv=path_transformed+'df_10pc.csv'
-df = pd.read_csv(df_csv)
+df = pd.read_csv(urllib.request.urlopen(df_csv))
 
 path_results='MODEL/'
 model_pkl=URL+path_results+"lgbmc_full.pkl"
-estimator=pickle.load(open(model_pkl, 'rb'))
+estimator=pickle.load(open(urllib.request.urlopen(model_pkl, 'rb')))
 
 explainer_pkl=URL+path_results+"explainer_lgbmc_full.pkl"
-explainer=pickle.load(open(explainer_pkl, 'rb'))
+explainer=pickle.load(open(urllib.request.urlopen(explainer_pkl, 'rb')))
 
 
 URL = "http://127.0.0.1:5000/"
