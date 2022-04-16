@@ -4,8 +4,8 @@ import flask
 import shap
 import pickle
 import json
-from sklearn.preprocessing import RobustScaler
-from imblearn.pipeline import Pipeline
+#from sklearn.preprocessing import RobustScaler
+#from imblearn.pipeline import Pipeline
 from lightgbm import LGBMClassifier
 from flask import Flask, jsonify,request
 import pandas as pd
