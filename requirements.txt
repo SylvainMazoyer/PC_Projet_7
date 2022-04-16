@@ -1,13 +1,13 @@
-Mettre toutes les bibliothèque pour l'app
 django
-streamlit
 gunicorn
 django-heroku
 flask
+pickle
 pandas
 numpy
 imblearn
 sklearn
-lightgbm
 shap
-entre autres
+lightgbm
+urllib
+json
