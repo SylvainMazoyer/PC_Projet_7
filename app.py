@@ -13,21 +13,17 @@ import numpy as np
 from pathlib import Path
 
 # Chargement du Df, du modèle et de l'explainer
-path_transformed='DATA//'
-df_csv=path_transformed+'df_25pc.csv'
-# Prendre dataframe avec 25% des données
-path = Path(__file__).parent / df_csv
-with path.open() as f:
-    df = pd.read_csv(f)
+URL="https://raw.githubusercontent.com/SylvainMazoyer/PC_Projet_7/main/"
+path_transformed=URL+'DATA/'
+df_csv=path_transformed+'df_10pc.csv'
+df = pd.read_csv(df_csv)
 
-path_results='MODEL//'
-model_pkl=path_results+"lgbmc_full.pkl"
-path = Path(__file__).parent / model_pkl
-estimator=pickle.load(open(path, 'rb'))
+path_results='MODEL/'
+model_pkl=URL+path_results+"lgbmc_full.pkl"
+estimator=pickle.load(open(model_pkl, 'rb'))
 
-explainer_pkl=path_results+"explainer_lgbmc_full.pkl"
-path = Path(__file__).parent / explainer_pkl
-explainer=pickle.load(open(path, 'rb'))
+explainer_pkl=URL+path_results+"explainer_lgbmc_full.pkl"
+explainer=pickle.load(open(explainer_pkl, 'rb'))
 
 
 URL = "http://127.0.0.1:5000/"
