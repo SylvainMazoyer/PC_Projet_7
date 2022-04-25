@@ -12,4 +12,4 @@ pandas
 sklearn
 imblearn
 lightgbm
-#shap
+shap
