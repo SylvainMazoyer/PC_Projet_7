@@ -1,8 +1,8 @@
-django
-gunicorn
-django-heroku
+#django
+#gunicorn
+#django-heroku
 flask
-pickle
+#pickle
 pandas
 numpy
 imblearn
