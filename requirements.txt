@@ -1,11 +1,15 @@
+# WEB 
+flask
 #django
 #gunicorn
 #django-heroku
-flask
+
+# DATA
 pandas
-numpy
-imblearn
+#numpy
+
+# ML
 sklearn
-shap
+imblearn
 lightgbm
-#urllib
+#shap
