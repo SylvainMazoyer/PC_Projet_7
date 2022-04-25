@@ -18,7 +18,7 @@ path_transformed=URL+'DATA/'
 df_csv=path_transformed+'df_10pc.csv'
 df = pd.read_csv(urllib.request.urlopen(df_csv))
 
-path_results='MODEL/'
+path_results=URL+'MODEL/'
 model_pkl=URL+path_results+"lgbmc_full.pkl"
 estimator=pickle.load(open(urllib.request.urlopen(model_pkl, 'rb')))
 
