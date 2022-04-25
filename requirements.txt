@@ -2,7 +2,6 @@
 #gunicorn
 #django-heroku
 flask
-#pickle
 pandas
 numpy
 imblearn
@@ -10,4 +9,3 @@ sklearn
 shap
 lightgbm
 #urllib
-json
