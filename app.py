@@ -38,16 +38,16 @@ with open(MODEL_PATH + EXPLAINER_FILE, "rb") as f:  # explainer
     explainer = pickle.load(f)
 
 
-# init flask
-app = Flask(__name__)
-
-
 # vars
 list_columns = df.columns.tolist()
 list_columns.remove("SK_ID_CURR")
 list_columns.remove("TARGET")
 select_features = list_columns
 # sku = 0
+
+
+# init flask
+app = Flask(__name__)
 
 
 # route test
@@ -79,45 +79,52 @@ def predict():
     # extract features for the sku
     X_sku = df.loc[(df["SK_ID_CURR"] == sku), select_features]
 
-    # # make preds
-    # result_pred = estimator.predict(X_sku)[0]
-    # result_pred_proba = estimator.predict_proba(X_sku)[0]
-    # print("result pred :" + str(result_pred))
-    # if result_pred == 0:
-    #     result_reimbursement = "Ok"
-    # else:
-    #     result_reimbursement = "Not ok"
+    # make preds
+    result_pred = estimator.predict(X_sku)[0]
+    result_pred_proba = estimator.predict_proba(X_sku)[0]
 
-    # # Utiliser module Loging, log écrit dans un fichier log
-    # print("Reimbursement : " + result_reimbursement)
+    print("result pred :" + str(result_pred))
+    if result_pred == 0:
+        result_reimbursement = "Ok"
+    else:
+        result_reimbursement = "Not ok"
 
-    # # build json
-    # pred_dict = {"pred": int(result_pred), "proba_0": result_pred_proba[0]}
-    # json_pred = json.dumps(pred_dict)
-    # print(pred_dict)
+    # Utiliser module Loging, log écrit dans un fichier log
+    print("Reimbursement : " + result_reimbursement)
 
-    # return json_pred
+    # build json
+    pred_dict = {"pred": int(result_pred), "proba_0": result_pred_proba[0]}
+    json_pred = json.dumps(pred_dict)
+    print(pred_dict)
 
-    return X_sku.to_json()
+    return json_pred
 
 
-# # send feature importance
-# @app.route("/return_shap_data", methods=["GET", "POST"])
-# def return_shap_data():
-#     json_sku = json.loads(request.data)
-#     sku = int(json_sku["sku"])
-#     print("sku :" + str(sku))
-#     X_sku = df.loc[(df["SK_ID_CURR"] == sku), select_features]
-#     shap_value = explainer(X_sku)[0]
-#     shap_data = pd.DataFrame(
-#         np.array([abs(shap_value.values), shap_value.values, shap_value.data.round(3)]).T,
-#         index=shap_value.feature_names,
-#         columns=["SHAP_Strength", "SHAP", "Data"],
-#     )
-#     shap_data = shap_data.sort_values(by="SHAP_Strength", ascending=False)
-#     shap_data = shap_data["SHAP"]
-#     json_shap_data = json.dumps({"SHAP_data": shap_data.to_json()})
-#     return json_shap_data
+# send feature importance
+@app.route("/return_shap_data", methods=["POST"])
+def return_shap_data():
+
+    # recupere id du client
+    json_sku = json.loads(request.data)  # remplacé par request.json()
+
+    sku = int(json_sku["sku"])
+    print("sku :" + str(sku))
+
+    # extract features for the sku
+    X_sku = df.loc[(df["SK_ID_CURR"] == sku), select_features]
+
+    # shap
+    shap_value = explainer(X_sku)
+
+    # shap_data = pd.DataFrame(
+    #     np.array([abs(shap_value.values), shap_value.values, shap_value.data.round(3)]).T,
+    #     index=shap_value.feature_names,
+    #     columns=["SHAP_Strength", "SHAP", "Data"],
+    # )
+    # shap_data = shap_data.sort_values(by="SHAP_Strength", ascending=False)
+    # shap_data = shap_data["SHAP"]
+    # json_shap_data = json.dumps({"SHAP_data": shap_data.to_json()})
+    # return json_shap_data
 
 
 if __name__ == "__main__":
