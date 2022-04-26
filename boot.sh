@@ -1,6 +1,8 @@
 #! /bin/sh
 
 # install 
+sudo apt update
+sudo apt upgrade
 sudo apt install python-pip
 sudo apt install python3-dev
 sudo apt install python3.10-venv
@@ -12,7 +14,7 @@ source env/bin/activate
 # install
 pip install -r requirements.txt
 
-# pull jic
+# pull
 git pull
 
 # run
