@@ -1,12 +1,16 @@
 urllib
+
+
 flask
 requests
+
 streamlit
+
 json
-plotly.graph_objs
 pathlib
 PIL
 numpy
 os
-plotly.express as px
+plotly
 ast
+plotly.graph_objs

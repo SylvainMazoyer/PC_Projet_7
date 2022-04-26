@@ -2,7 +2,8 @@
 flask
 #django
 #gunicorn
-#django-heroku
+# django-heroku
+requests
 
 # DATA
 pandas
