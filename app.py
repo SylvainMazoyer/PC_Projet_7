@@ -68,7 +68,7 @@ def send_sku():
     return json_dict_sku
 
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["GET"])
 def predict():
 
     # recupere id du client
@@ -101,7 +101,7 @@ def predict():
 
 
 # send feature importance
-@app.route("/return_shap_data", methods=["POST"])
+@app.route("/return_shap_data", methods=["GET"])
 def return_shap_data():
 
     # recupere id du client
