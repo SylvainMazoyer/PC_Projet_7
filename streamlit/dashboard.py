@@ -1,4 +1,4 @@
-
+# HTTP communication
 from flask import Flask
 import requests
 
@@ -16,11 +16,12 @@ import plotly.graph_objs as go
 import plotly.express as px
 import ast
 
-path_img='IMG/'
 
-dollars_jpg  = os.path.abspath(path_img+'dollars.jpg')
+# Loading intro image
+PATH_IMG='IMG/'
+PATH_DOLLARS  = PATH_IMG+'dollars.jpg'
 
-with  Image.open(dollars_jpg) as dollars_img:
+with  Image.open(PATH_DOLLARS) as dollars_img:
     dollars_img=np.array(dollars_img)
 
 st.image(dollars_img, output_format="JPEG")
@@ -110,8 +111,8 @@ def predict_selected_sku(sku):
     st.plotly_chart(fig, use_container_width=True)
 
     # displaying shap importance for 1000 clients
-    shap_1000_png  = os.path.abspath(path_img+'hist_abs_shap_1000.png')
-    with  Image.open(shap_1000_png) as shap_100_img:
+    PATH_SHAP_1000  = PATH_IMG+'hist_abs_shap_1000.png'
+    with  Image.open( PATH_SHAP_1000) as shap_100_img:
         shap_1000_img=np.array(shap_100_img)
 
 
