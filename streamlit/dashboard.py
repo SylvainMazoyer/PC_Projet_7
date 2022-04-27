@@ -56,6 +56,7 @@ def ask_user_sku():
         
 
 def predict_selected_sku(sku):
+    
     sku=int(sku)
     sku_dict={'sku' : sku}
     json_data=json.dumps(sku_dict)
