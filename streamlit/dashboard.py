@@ -1,19 +1,24 @@
-from urllib import response
-from flask import Flask, jsonify, request
+
+from flask import Flask
 import requests
-import streamlit as st
-import json
-import plotly.graph_objs as go
-from pathlib import Path
-from PIL import Image
-import numpy as np
+
+# OS path
 import os
+
+# Data reading
+import numpy as np
+import json
+
+# Displaying libraries
+import streamlit as st
+from PIL import Image
+import plotly.graph_objs as go
 import plotly.express as px
 import ast
 
-path_transformed='IMG//'
+path_img='IMG/'
 
-dollars_jpg  = os.path.abspath(path_transformed+'dollars.jpg')
+dollars_jpg  = os.path.abspath(path_img+'dollars.jpg')
 
 with  Image.open(dollars_jpg) as dollars_img:
     dollars_img=np.array(dollars_img)
@@ -25,41 +30,33 @@ URL = "http://127.0.0.1:5000/"
 app=Flask(__name__)
 
 list_sku=[]
-selected_sku=0
 prediction=0
 
-# route test
-#@app.route("/ask_for_sku", methods=['POST'])
 def ask_for_list_sku():
+
     json_list_sku = requests.get(URL+"/send_sku")
     json_text=json_list_sku.text
-    #st.write(json_text)
-    #dict_sku=ast.literal_eval(json_text)
     dict_sku=eval(json_text)
     for key, value in dict_sku.items():   
         list_sku.append(value)
-    #sku_0=list_sku[0]
-    #st.write(sku_0)
     return (list_sku)
 
 def ask_user_sku():
-    global selected_sku
+
+    selected_sku=0
     selected_sku=int(st.number_input("enter cient  sk Id : ",value=100002))
     if selected_sku not in list_sku:
         st.header("This sku doesn't correspond to any client.")
         return -1
     else:
-        #st.write(selected_sku)
         button=st.button("Ok")
-        #return selected_sku
     if button==True:
-        predict_selected_sku()
+        predict_selected_sku(sku=selected_sku)
         
 
-#@app.route("/predict_selected_sku", methods=['GET'])
-# Essayer d'éviter variables globales, passez en argument de la fonction
-def predict_selected_sku():
-    sku_dict={'sku' : selected_sku}
+def predict_selected_sku(sku):
+    sku=int(sku)
+    sku_dict={'sku' : sku}
     json_data=json.dumps(sku_dict)
     json_response = requests.get(URL+"/predict", data=json_data)
     
@@ -94,7 +91,6 @@ def predict_selected_sku():
     json_response = requests.get(URL+"/return_shap_data", data=json_data)
     json_shap = json_response.json()
     shap_data_all=json_shap['SHAP_data']
-    #shap_data_dict=json.load(shap_data_all)
     shap_data_dict=ast.literal_eval(shap_data_all)
     list_features_shap=[]
     for key, value in shap_data_dict.items():   
@@ -102,16 +98,25 @@ def predict_selected_sku():
 
     list_features_shap.sort(key=lambda tup: abs(tup[1]), reverse=True)
     list_features_shap=list_features_shap[0:10]
-    #st.write(list_features_shap)
     list_features=[]
     list_shap_values=[]
     for shap in list_features_shap:
         list_features.append(shap[0])
         list_shap_values.append(abs(shap[1]))
 
+    # displaying shap values
     st.header("Importance of features for help to decision")
     fig = px.bar(x=list_features, y=list_shap_values)#, title="Importance of features")
     st.plotly_chart(fig, use_container_width=True)
+
+    # displaying shap importance for 1000 clients
+    shap_1000_png  = os.path.abspath(path_img+'hist_abs_shap_1000.png')
+    with  Image.open(shap_1000_png) as shap_100_img:
+        shap_1000_img=np.array(shap_100_img)
+
+
+    st.header("Importance of features for  1000 clients for comparison")
+    st.image(shap_1000_img, output_format="JPEG")
 
     return json_data
 
