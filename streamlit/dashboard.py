@@ -2,9 +2,6 @@
 from flask import Flask
 import requests
 
-# OS path
-import os
-
 # Data reading
 import numpy as np
 import json
