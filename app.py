@@ -116,15 +116,15 @@ def return_shap_data():
     # shap
     shap_value = explainer(X_sku)[0]
 
-    # shap_data = pd.DataFrame(
-    #     np.array([abs(shap_value.values), shap_value.values, shap_value.data.round(3)]).T,
-    #     index=shap_value.feature_names,
-    #     columns=["SHAP_Strength", "SHAP", "Data"],
-    # )
-    # shap_data = shap_data.sort_values(by="SHAP_Strength", ascending=False)
-    # shap_data = json.dumps(shap_data["SHAP"])
-    # json_shap_data = json.dumps({"SHAP_data": shap_data})
-    # return json_shap_data
+    shap_data = pd.DataFrame(
+         np.array([abs(shap_value.values), shap_value.values, shap_value.data.round(3)]).T,
+         index=shap_value.feature_names,
+         columns=["SHAP_Strength", "SHAP", "Data"]
+    )
+    shap_data = shap_data.sort_values(by="SHAP_Strength", ascending=False)
+    shap_data = shap_data["SHAP"]
+    json_shap_data = json.dumps({"SHAP_data": shap_data.to_json()})
+    return json_shap_data
 
 
 if __name__ == "__main__":
