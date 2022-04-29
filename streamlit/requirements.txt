@@ -13,5 +13,5 @@ numpy
 #os
 #plotly
 #ast
-plotly.graph_objs
+plotly.graph_objects
 plotly.express
