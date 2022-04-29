@@ -14,3 +14,4 @@ os
 plotly
 ast
 plotly.graph_objs
+plotly.express
