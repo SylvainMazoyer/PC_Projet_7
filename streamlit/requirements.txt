@@ -12,6 +12,6 @@ Pillow
 numpy
 #os
 plotly
-ast
+#ast
 plotly.graph_objs
 plotly.express
