@@ -122,8 +122,8 @@ def return_shap_data():
     #     columns=["SHAP_Strength", "SHAP", "Data"],
     # )
     # shap_data = shap_data.sort_values(by="SHAP_Strength", ascending=False)
-    # shap_data = shap_data["SHAP"]
-    # json_shap_data = json.dumps({"SHAP_data": shap_data.to_json()})
+    # shap_data = json.dumps(shap_data["SHAP"])
+    # json_shap_data = json.dumps({"SHAP_data": shap_data})
     # return json_shap_data
 
 
