@@ -8,7 +8,7 @@ streamlit
 
 #json
 #pathlib
-PIL
+Pillow
 numpy
 #os
 plotly
