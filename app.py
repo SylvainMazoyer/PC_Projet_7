@@ -114,7 +114,7 @@ def return_shap_data():
     X_sku = df.loc[(df["SK_ID_CURR"] == sku), select_features]
 
     # shap
-    shap_value = explainer(X_sku)
+    shap_value = explainer(X_sku)[0]
 
     # shap_data = pd.DataFrame(
     #     np.array([abs(shap_value.values), shap_value.values, shap_value.data.round(3)]).T,
