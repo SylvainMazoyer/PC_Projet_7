@@ -11,7 +11,7 @@ streamlit
 Pillow
 numpy
 #os
-plotly
+#plotly
 #ast
 plotly.graph_objs
 plotly.express
