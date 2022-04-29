@@ -7,10 +7,10 @@ requests
 streamlit
 
 #json
-pathlib
+#pathlib
 PIL
 numpy
-os
+#os
 plotly
 ast
 plotly.graph_objs
