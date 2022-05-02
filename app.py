@@ -24,7 +24,7 @@ DATA_PATH = "DATA/"
 MODEL_PATH = "MODEL/"
 
 # FILES
-MODEL_FILE = "lgbmc_full.pkl"
+MODEL_FILE = "lgbmc_final_V2.pkl"
 DATA_FILE = "df_10pc.csv"
 EXPLAINER_FILE = "explainer_lgbmc_final_V2.pkl"
 
