@@ -23,15 +23,17 @@ def test_send_sku(route="send_sku"):
 
 def test_predict(route="predict", sku=100002):
 
-    response = requests.post(URL + route, json={"sku": sku})
-    assert response.status_code == 200
+    response = requests.get(URL + route, json={"sku": sku})
+    if response.status_code != 200:
+        print(response.text)
     print(response.json())
 
 
 def test_shap(route="return_shap_data", sku=100002):
 
-    response = requests.post(URL + route, json={"sku": sku})
-    assert response.status_code == 200
+    response = requests.get(URL + route, json={"sku": sku})
+    if response.status_code != 200:
+        print(response.text)
     print(response.json())
 
 
