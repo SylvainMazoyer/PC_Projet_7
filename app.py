@@ -26,7 +26,7 @@ MODEL_PATH = "MODEL/"
 # FILES
 MODEL_FILE = "lgbmc_full.pkl"
 DATA_FILE = "df_10pc.csv"
-EXPLAINER_FILE = "explainer_lgbmc_full.pkl"
+EXPLAINER_FILE = "explainer_lgbmc_final_V2.pkl"
 
 
 # READ OBJECTS
@@ -117,9 +117,9 @@ def return_shap_data():
     shap_value = explainer(X_sku)[0]
 
     shap_data = pd.DataFrame(
-         np.array([abs(shap_value.values), shap_value.values, shap_value.data.round(3)]).T,
-         index=shap_value.feature_names,
-         columns=["SHAP_Strength", "SHAP", "Data"]
+        np.array([abs(shap_value.values), shap_value.values, shap_value.data.round(3)]).T,
+        index=shap_value.feature_names,
+        columns=["SHAP_Strength", "SHAP", "Data"],
     )
     shap_data = shap_data.sort_values(by="SHAP_Strength", ascending=False)
     shap_data = shap_data["SHAP"]
