@@ -24,7 +24,8 @@ with  Image.open(PATH_DOLLARS) as dollars_img:
 st.image(dollars_img, output_format="JPEG")
 st.title('Credit reimbursement prediction')
 
-URL = "http://127.0.0.1:5000/"
+#URL = "http://127.0.0.1:5000/"
+URL = "http://194.233.168.72/"
 app=Flask(__name__)
 
 list_sku=[]
