@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 
 import sklearn
-from lightgbm import LGBMClassifier
+from sklearn.ensemble import RandomForestClassifier
 import shap
 
 # from pathlib import Path
@@ -24,9 +24,9 @@ DATA_PATH = "DATA/"
 MODEL_PATH = "MODEL/"
 
 # FILES
-MODEL_FILE = "lgbmc_final_V2.pkl"
-DATA_FILE = "df_10pc.csv"
-EXPLAINER_FILE = "explainer_lgbmc_final_V2.pkl"
+DATA_FILE='df_train_full_imp_0,033pc.csv'
+MODEL_FILE='rfc_2.pkl'
+EXPLAINER_FILE="rfc_explainer_2.pkl.pkl"
 
 
 # READ OBJECTS
