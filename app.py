@@ -26,7 +26,7 @@ MODEL_PATH = "MODEL/"
 # FILES
 DATA_FILE='df_train_full_imp_0,033pc.csv'
 MODEL_FILE='rfc_2.pkl'
-EXPLAINER_FILE="rfc_explainer_2.pkl.pkl"
+EXPLAINER_FILE="rfc_explainer_2.pkl"
 
 
 # READ OBJECTS
