@@ -124,7 +124,7 @@ def return_shap_data() :
     #shap_data = shap_data.sort_values(by="SHAP_Strength", ascending=False)
 
     shap_data=shap_sku.transpose()
-    shap_data=pd.Series(shap_data[0])
+    shap_data=pd.Series(shap_data.iloc[:,0])
     shap_data=shap_data.sort_values(ascending=False)
 
     # build json
