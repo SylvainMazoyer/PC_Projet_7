@@ -6,6 +6,10 @@ import requests
 import numpy as np
 import json
 
+# os
+import os
+from pathlib import Path
+
 # Displaying libraries
 import streamlit as st
 from PIL import Image
@@ -13,12 +17,12 @@ import plotly.graph_objs as go
 import plotly.express as px
 import ast
 
+path_img='IMG/'
+script_dir = os.path.dirname(__file__)
+rel_path = path_img+'dollars.jpg'
+dollars_jpg = os.path.join(script_dir, rel_path)
 
-# Loading intro image
-PATH_IMG='IMG/'
-PATH_DOLLARS  = PATH_IMG+'dollars.jpg'
-
-with  Image.open(PATH_DOLLARS) as dollars_img:
+with  Image.open(dollars_jpg) as dollars_img:
     dollars_img=np.array(dollars_img)
 
 st.image(dollars_img, output_format="JPEG")
@@ -54,7 +58,6 @@ def ask_user_sku():
         
 
 def predict_selected_sku(sku):
-    
     sku=int(sku)
     sku_dict={'sku' : sku}
     json_data=json.dumps(sku_dict)
@@ -110,9 +113,10 @@ def predict_selected_sku(sku):
     st.plotly_chart(fig, use_container_width=True)
 
     # displaying shap importance for 1000 clients
-    PATH_SHAP_1000  = PATH_IMG+'hist_abs_shap_1000.png'
-    with  Image.open( PATH_SHAP_1000) as shap_100_img:
-        shap_1000_img=np.array(shap_100_img)
+    rel_path = path_img+'hist_abs_shap_1000.png'
+    shap_1000_png = os.path.join(script_dir, rel_path)
+    with  Image.open(shap_1000_png) as shap_1000_img:
+        shap_1000_img=np.array(shap_1000_img)
 
 
     st.header("Importance of features for  1000 clients for comparison")
