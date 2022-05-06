@@ -12,6 +12,8 @@ Pillow
 numpy
 #os
 plotly
+matplotlib
+shap
 #ast
 #plotly.graph_objects
 #plotly.express
