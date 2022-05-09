@@ -1,1 +1,1 @@
-This folder contains the dataset
+This folder contains the datasets used by the back end server
